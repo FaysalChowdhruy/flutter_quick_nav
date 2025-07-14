@@ -1,16 +1,17 @@
-# example
+# Example for `flutter_quick_nav`
 
-A new Flutter project.
+This is the official example app demonstrating how to use the [`flutter_quick_nav`](https://pub.dev/packages/flutter_quick_nav) package — a lightweight navigation utility for Flutter with fade transitions and simplified push, replace, and reset functionality.
 
-## Getting Started
+## ✨ Features Demonstrated
 
-This project is a starting point for a Flutter application.
+- `FlutterQuickNav.push(context, screen)`
+- `FlutterQuickNav.replace(context, screen)`
+- `FlutterQuickNav.pushAndRemoveUntil(context, screen, untilRoute: '/home')`
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Getting Started
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To run this example:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+cd example
+flutter run
