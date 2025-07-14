@@ -1,8 +1,4 @@
-## 0.0.1 - Initial Release
+## [1.0.0] - 2025-07-14
 
-- 🎉 First release of `flutter_quick_nav`.
-- Provides simple and lightweight navigation utilities for Flutter:
-    - `FlutterQuickNav.push`: Navigate to a new screen with a fade transition.
-    - `FlutterQuickNav.replace`: Replace the current screen with another.
-    - `FlutterQuickNav.pushAndRemoveUntil`: Push and remove all previous routes until a named one.
-- Designed for clean, reusable, and animation-friendly navigation code.
+- Initial release of `flutter_quick_nav`.
+- Provides push, replace, and pushAndRemoveUntil navigation helpers with fade animation.
