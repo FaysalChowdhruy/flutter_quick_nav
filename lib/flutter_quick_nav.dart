@@ -33,10 +33,10 @@ class FlutterQuickNav {
   ///
   /// Defaults to removing until `/Home`.
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
-      BuildContext context,
-      Widget screen, {
-        String untilRoute = '/Home',
-      }) {
+    BuildContext context,
+    Widget screen, {
+    String untilRoute = '/Home',
+  }) {
     return Navigator.pushAndRemoveUntil<T>(
       context,
       MaterialPageRoute(builder: (_) => screen),

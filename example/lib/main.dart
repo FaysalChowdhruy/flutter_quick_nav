@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const HomePage(),
-      routes: {
-        '/home': (context) => const HomePage(),
-      },
+      // routes: {'/home': (context) => const HomePage()}, // Uncomment if you want to use named routes
     );
   }
 }
@@ -35,10 +33,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('🏠 Home Page'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('🏠 Home Page'), centerTitle: true),
       body: Center(
         child: ElevatedButton.icon(
           onPressed: () {
@@ -67,10 +62,7 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('🧭 Second Page'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('🧭 Second Page'), centerTitle: true),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -86,10 +78,8 @@ class SecondPage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {
-                FlutterQuickNav.pushAndRemoveUntil(
-                  context,
-                  const HomePage(),
-                  untilRoute: '/home',
+                FlutterQuickNav.pushAndRemoveUntil(context, const HomePage(),
+                  // untilRoute: '/home', // Uncomment if using named routes
                 );
               },
               icon: const Icon(Icons.home_rounded),
@@ -105,9 +95,7 @@ class SecondPage extends StatelessWidget {
   ButtonStyle _buttonStyle({Color background = Colors.deepPurple}) {
     return ElevatedButton.styleFrom(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       backgroundColor: background,
       foregroundColor: Colors.white,
     );
@@ -120,10 +108,7 @@ class FinalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('🎯 Final Page'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('🎯 Final Page'), centerTitle: true),
       body: const Center(
         child: Text(
           '🎉 You made it to the final page!',

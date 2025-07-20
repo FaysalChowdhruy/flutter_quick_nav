@@ -2,9 +2,9 @@ name: flutter_quick_nav
 description: A quick and easy Flutter navigation utility with fade transitions.
 version: 1.0.0
 
-homepage: https://github.com/FaysalChowdhury/flutter_quick_nav
-repository: https://github.com/FaysalChowdhury/flutter_quick_nav
-issue_tracker: https://github.com/FaysalChowdhury/flutter_quick_nav/issues
+homepage: https://github.com/FaysalChowdhruy/flutter_quick_nav
+repository: https://github.com/FaysalChowdhruy/flutter_quick_nav
+issue_tracker: https://github.com/FaysalChowdhruy/flutter_quick_nav/issues
 documentation: https://pub.dev/documentation/flutter_quick_nav/latest/
 
 environment:

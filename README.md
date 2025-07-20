@@ -8,14 +8,16 @@ https://dart.dev/tools/pub/writing-package-pages
 
 # flutter_quick_nav
 
-The `flutter_quick_nav` package is a Flutter navigation utility that simplifies screen transitions. It provides an easy way to push, replace, and reset screens — with smooth fade animations — making your app’s navigation more elegant and manageable.
+`flutter_quick_nav` is a lightweight Flutter navigation utility that simplifies screen transitions using clean and intuitive methods. It provides a smooth fade animation and streamlines navigation by wrapping common patterns like `push`, `replace`, and `pushAndRemoveUntil`.
 
-## Features
+---
 
-- Navigate to a new screen with a fade animation.
-- Replace the current screen with another.
-- Push a screen and remove all previous routes until a named route.
-- Clean and minimal API with `BuildContext` and `Widget`.
+## ✨ Features
+
+- 🚀 Navigate to a new screen with a fade transition.
+- 🔁 Replace the current screen.
+- 🧹 Push and remove all previous routes until a specified named route.
+- 🧼 Clean API using just `BuildContext` and `Widget`.
 
 ---
 
@@ -50,6 +52,31 @@ Run either of the following commands in your terminal:
 ```yaml
   import 'package:flutter_quick_nav/flutter_quick_nav.dart';
 ```
+
+## 🔹 Quick Usage
+
+Use these one-liners to navigate your app with elegant fade transitions:
+
+### ➕ Push a new screen
+
+```dart
+FlutterQuickNav.push(context, const SecondPage());
+
+### 🔁 Replace the current screen
+
+```dart
+FlutterQuickNav.replace(context, const FinalPage());
+
+
+### 🧹 Push and remove until a named
+
+### when using named routes
+```dart
+FlutterQuickNav.pushAndRemoveUntil(context,const HomePage(),untilRoute: '/home',); // when using named routes
+
+```dart
+FlutterQuickNav.pushAndRemoveUntil(context,const HomePage());
+
 
 ## 🧑‍💻 Usage Example
 
@@ -145,13 +172,13 @@ class FinalPage extends StatelessWidget {
 
 ```
 ## 📦 Null Safety
-This package is fully null-safe and supports the latest versions of Flutter.
+This package is 100% null-safe and compatible with the latest Flutter versions.
 
 ## 💡 Contribution
 Contributions, issues, and feature requests are welcome!
 Feel free to open an issue or submit a pull request.
 
-##  License
+## 📄 License
 This project is licensed under the MIT License — see the LICENSE file for details.
 
 ## 🙌 Support
