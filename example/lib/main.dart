@@ -78,7 +78,9 @@ class SecondPage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton.icon(
               onPressed: () {
-                FlutterQuickNav.pushAndRemoveUntil(context, const HomePage(),
+                FlutterQuickNav.pushAndRemoveUntil(
+                  context,
+                  const HomePage(),
                   // untilRoute: '/home', // Uncomment if using named routes
                 );
               },
