@@ -59,24 +59,27 @@ Use these one-liners to navigate your app with elegant fade transitions:
 
 ### ➕ Push a new screen
 
-```dart
+```yaml
 FlutterQuickNav.push(context, const SecondPage());
-
+...
+  
+  
 ### 🔁 Replace the current screen
 
-```dart
+```yaml
 FlutterQuickNav.replace(context, const FinalPage());
-
+...
 
 ### 🧹 Push and remove until a named
 
 ### when using named routes
-```dart
+```yaml
 FlutterQuickNav.pushAndRemoveUntil(context,const HomePage(),untilRoute: '/home',); // when using named routes
+...
 
-```dart
+```yaml
 FlutterQuickNav.pushAndRemoveUntil(context,const HomePage());
-
+...
 
 ## 🧑‍💻 Usage Example
 
