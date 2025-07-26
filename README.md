@@ -34,12 +34,6 @@ See the navigation in action:
 
 ---
 
-## 🚀 Screenshots
-
-> *Note: This package affects screen transitions only, not UI layout.*
-
----
-
 ## 🔧 Installation
 
 ### 1. Depend on it
