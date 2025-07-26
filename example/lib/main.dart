@@ -50,15 +50,17 @@ class _HomePageState extends State<HomePage> {
             DropdownButtonFormField<TransitionType>(
               value: _selectedTransition,
               decoration: const InputDecoration(labelText: 'Select Transition'),
-              items: TransitionType.values.map((type) {
-                return DropdownMenuItem(
-                  value: type,
-                  child: Text(type.name),
-                );
-              }).toList(),
-              onChanged: (value) => setState(() {
-                _selectedTransition = value!;
-              }),
+              items:
+                  TransitionType.values.map((type) {
+                    return DropdownMenuItem(
+                      value: type,
+                      child: Text(type.name),
+                    );
+                  }).toList(),
+              onChanged:
+                  (value) => setState(() {
+                    _selectedTransition = value!;
+                  }),
             ),
             const SizedBox(height: 20),
             Text('Duration: ${_duration.toInt()}ms'),
@@ -100,7 +102,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
 
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
