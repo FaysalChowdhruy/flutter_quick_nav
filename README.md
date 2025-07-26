@@ -18,7 +18,7 @@ https://dart.dev/tools/pub/writing-package-pages
 
 See the navigation in action:
 
-![FlutterQuickNav Demo](demo.gif)
+![FlutterQuickNav Demo](assets/demo.gif)
 
 ---
 
