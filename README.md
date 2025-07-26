@@ -6,18 +6,25 @@ For writing tips, see:
 https://dart.dev/tools/pub/writing-package-pages
 -->
 
-# flutter_quick_nav
+# 🚀 flutter_quick_nav
 
-`flutter_quick_nav` is a lightweight Flutter navigation utility that simplifies screen transitions using clean and intuitive methods. It provides a smooth fade animation and streamlines navigation by wrapping common patterns like `push`, `replace`, and `pushAndRemoveUntil`.
+`flutter_quick_nav` is a lightweight Flutter navigation utility that simplifies screen transitions using clean and intuitive methods. It provides smooth built-in animations like `fade`, `slide`, `scale`, and `rotate`, and streamlines navigation with simple API calls like `push`, `replace`, and `pushAndRemoveUntil`.
+
+[![Pub Version](https://img.shields.io/pub/v/flutter_quick_nav.svg)](https://pub.dev/packages/flutter_quick_nav)
 
 ---
 
+
+
 ## ✨ Features
 
-- 🚀 Navigate to a new screen with a fade transition.
+- 🚀 Navigate to a new screen with custom transitions
 - 🔁 Replace the current screen.
-- 🧹 Push and remove all previous routes until a specified named route.
-- 🧼 Clean API using just `BuildContext` and `Widget`.
+- 🧹 Push and remove all previous routes (with optional named route)
+- 🎛️ Choose from `fade`, `slideLeft`, `slideRight`, `slideUp`, `slideDown`, `scale`, or `rotate` transitions
+- ⏱️ Customize transition duration and animation curve
+- 🧼 Clean, easy-to-use API
+- 💯 Null safe
 
 ---
 
@@ -35,7 +42,7 @@ Add this to your package’s `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_quick_nav: ^1.0.0
+  flutter_quick_nav: ^1.0.2
 ```
 
 ### 2. Install it
@@ -55,8 +62,6 @@ Run either of the following commands in your terminal:
 
 ## 🔹 Quick Usage
 
-Use these one-liners to navigate your app with elegant fade transitions:
-
 ### ➕ Push a new screen
 
 ```yaml
@@ -69,149 +74,150 @@ Use these one-liners to navigate your app with elegant fade transitions:
   FlutterQuickNav.replace(context, const FinalPage());
 ```
 
-### 🧹 Push and remove until a named
+### 🧹 Push and remove all previous screens
 
 ```yaml
   FlutterQuickNav.pushAndRemoveUntil(context,const HomePage());
 ```
-### when using named routes
+### 📛 Push and remove until a named route
 ```yaml
-  FlutterQuickNav.pushAndRemoveUntil(context,const HomePage(),untilRoute: '/home',); // when using named routes
+  FlutterQuickNav.pushAndRemoveUntil(context,const HomePage(),untilRoute: '/home',);
 ```
+
+### 🎛️ With transition type, duration, and curve
+```yaml
+ FlutterQuickNav.push(
+  context,
+  const SettingsPage(),
+  type: TransitionType.slideUp,
+  duration: const Duration(milliseconds: 500),
+  curve: Curves.easeInOut,
+);
+```
+
+### ✨ Supported Transitions
+
+| Transition Type | Description                     |
+|-----------------|---------------------------------|
+| `fade`          | Fades between screens           |
+| `slideLeft`     | Slides in from the right        |
+| `slideRight`    | Slides in from the left         |
+| `slideUp`       | Slides in from the bottom       |
+| `slideDown`     | Slides in from the top          |
+| `scale`         | Zoom in/out scale transition    |
+| `rotate`        | Rotates the new screen in       |
+
 
 
 ## 🧑‍💻 Usage Example
 
 ```yaml
-    import 'package:flutter/material.dart';
-    import 'package:flutter_quick_nav/flutter_quick_nav.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_quick_nav/flutter_quick_nav.dart';
 
-        void main() {
-        runApp(const MyApp());
-    }
+void main() => runApp(const MyApp());
 
-        class MyApp extends StatelessWidget {
-        const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-        @override
-        Widget build(BuildContext context) {
-        return MaterialApp(
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       title: 'flutter_quick_nav Example',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontSize: 16),
-          headlineSmall: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        ),
+      ),
       home: const HomePage(),
-      // routes: {'/home': (context) => const HomePage()}, // Optional if using named routes
-        );
-    }
-    }
+      // routes: {'/home': (context) => const HomePage()}, // Optional
+    );
+  }
+}
 
-        class HomePage extends StatelessWidget {
-        const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
-        @override
-        Widget build(BuildContext context) {
-        return Scaffold(
-      appBar: AppBar(
-        title: const Text('🏠 Home Page'),
-        centerTitle: true,
-        ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('🏠 Home Page'), centerTitle: true),
       body: Center(
         child: ElevatedButton.icon(
-          onPressed: () {
-            FlutterQuickNav.push(context, const SecondPage());
-        },
+          onPressed: () => FlutterQuickNav.push(context, const SecondPage()),
           icon: const Icon(Icons.arrow_forward_rounded),
           label: const Text('Go to Second Page'),
           style: _buttonStyle(),
         ),
-        ),
-        );
-    }
-    }
+      ),
+    );
+  }
+}
 
-        class SecondPage extends StatelessWidget {
-        const SecondPage({super.key});
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
 
-        @override
-        Widget build(BuildContext context) {
-        return Scaffold(
-      appBar: AppBar(
-        title: const Text('🧭 Second Page'),
-        centerTitle: true,
-        ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('🧭 Second Page'), centerTitle: true),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton.icon(
-            onPressed: () {
-                            FlutterQuickNav.replace(context, const FinalPage());
-            },
-            icon: const Icon(Icons.auto_awesome),
-            label: const Text('Replace with Final Page'),
-            style: _buttonStyle(background: Colors.deepPurple),
+              onPressed: () =>
+                  FlutterQuickNav.replace(context, const FinalPage()),
+              icon: const Icon(Icons.auto_awesome),
+              label: const Text('Replace with Final Page'),
+              style: _buttonStyle(background: Colors.deepPurple),
             ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
-            onPressed: () {
-                            FlutterQuickNav.pushAndRemoveUntil(
-                            context,
-                            const HomePage(),
-              // untilRoute: '/home', // Optional named route
-                            );
-            },
-            icon: const Icon(Icons.home_rounded),
-            label: const Text('Reset to Home'),
-            style: _buttonStyle(background: Colors.green),
+              onPressed: () => FlutterQuickNav.pushAndRemoveUntil(
+                context,
+                const HomePage(),
+              ),
+              icon: const Icon(Icons.home_rounded),
+              label: const Text('Reset to Home'),
+              style: _buttonStyle(background: Colors.green),
             ),
           ],
         ),
-        ),
-        );
-    }
-    }
+      ),
+    );
+  }
+}
 
-        class FinalPage extends StatelessWidget {
-        const FinalPage({super.key});
+class FinalPage extends StatelessWidget {
+  const FinalPage({super.key});
 
-        @override
-        Widget build(BuildContext context) {
-        return Scaffold(
-      appBar: AppBar(
-        title: const Text('🎯 Final Page'),
-        centerTitle: true,
-        ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('🎯 Final Page'), centerTitle: true),
       body: const Center(
         child: Text(
           '🎉 You made it to the final page!',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
-        ),
-        );
-    }
-    }
+      ),
+    );
+  }
+}
 
-        /// Reusable button style for consistent design
-        ButtonStyle _buttonStyle({Color background = Colors.indigo}) {
-        return ElevatedButton.styleFrom(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        ),
-      elevation: 4,
-      backgroundColor: background,
-      foregroundColor: Colors.white,
-        );
-    }
-
+ButtonStyle _buttonStyle({Color background = Colors.indigo}) {
+  return ElevatedButton.styleFrom(
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+    ),
+    elevation: 4,
+    backgroundColor: background,
+    foregroundColor: Colors.white,
+  );
+}
 
 ```
 
