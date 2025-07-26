@@ -1,3 +1,13 @@
+## [1.0.3] - 2025-07-26
+### Fixed
+- Resized demo GIF display in README for better loading and layout
+- Fixed minor typos and improved wording in README documentation
+- Optimized transition animation performance in example app
+
+### Fixed
+- Added HTML image tag for demo GIF resizing in README
+- Cleaned up example code formatting and comments
+
 ## [1.0.2] - 2025-07-26
 ### Added
 - New transition types: `slideUp` and `slideDown`

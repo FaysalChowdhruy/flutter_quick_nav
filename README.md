@@ -42,7 +42,7 @@ Add this to your package’s `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_quick_nav: ^1.0.2
+  flutter_quick_nav: ^1.0.3
 ```
 
 ### 2. Install it
