@@ -27,34 +27,80 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  TransitionType _selectedTransition = TransitionType.fade;
+  double _duration = 300;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('🏠 Home Page'), centerTitle: true),
-      body: Center(
-        child: ElevatedButton.icon(
-          onPressed: () {
-            FlutterQuickNav.push(context, const SecondPage());
-          },
-          icon: const Icon(Icons.arrow_forward_rounded),
-          label: const Text('Go to Second Page'),
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DropdownButtonFormField<TransitionType>(
+              value: _selectedTransition,
+              decoration: const InputDecoration(labelText: 'Select Transition'),
+              items: TransitionType.values.map((type) {
+                return DropdownMenuItem(
+                  value: type,
+                  child: Text(type.name),
+                );
+              }).toList(),
+              onChanged: (value) => setState(() {
+                _selectedTransition = value!;
+              }),
             ),
-            elevation: 4,
-            backgroundColor: Colors.indigo,
-            foregroundColor: Colors.white,
-          ),
+            const SizedBox(height: 20),
+            Text('Duration: ${_duration.toInt()}ms'),
+            Slider(
+              value: _duration,
+              min: 100,
+              max: 1000,
+              divisions: 9,
+              label: _duration.toInt().toString(),
+              onChanged: (value) => setState(() => _duration = value),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: () {
+                FlutterQuickNav.push(
+                  context,
+                  const SecondPage(),
+                  type: _selectedTransition,
+                  duration: Duration(milliseconds: _duration.toInt()),
+                );
+              },
+              icon: const Icon(Icons.arrow_forward_rounded),
+              label: const Text('Go to Second Page'),
+              style: _buttonStyle(),
+            ),
+          ],
         ),
       ),
     );
   }
+
+  ButtonStyle _buttonStyle() {
+    return ElevatedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 4,
+      backgroundColor: Colors.indigo,
+      foregroundColor: Colors.white,
+    );
+  }
 }
+
 
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});

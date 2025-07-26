@@ -2,45 +2,107 @@ library flutter_quick_nav;
 
 import 'package:flutter/material.dart';
 
-/// A lightweight Flutter navigation utility package.
-///
-/// Provides simplified methods to navigate between screens
-/// using fade animations and common navigation patterns.
+/// Available transition types
+enum TransitionType { fade, slideLeft, slideRight, slideUp, slideDown, scale, rotate }
+
+
+/// Navigation helper class
 class FlutterQuickNav {
-  /// Pushes a new screen with a fade transition.
+  /// Push a new page with animation
   static Future<T?> push<T extends Object?>(
-      BuildContext context, Widget screen) {
+      BuildContext context,
+      Widget screen, {
+        TransitionType type = TransitionType.fade,
+        Duration duration = const Duration(milliseconds: 300),
+        Curve curve = Curves.easeInOut,
+      }) {
     return Navigator.push<T>(
       context,
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => screen,
-        transitionsBuilder: (_, animation, __, child) =>
-            FadeTransition(opacity: animation, child: child),
-      ),
+      _animatedRoute(screen, type, duration, curve) as Route<T>,
     );
   }
 
-  /// Replaces the current screen with the given one.
+  /// Replace current page with another
   static Future<T?> replace<T extends Object?, TO extends Object?>(
-      BuildContext context, Widget screen) {
+      BuildContext context,
+      Widget screen, {
+        TransitionType type = TransitionType.fade,
+        Duration duration = const Duration(milliseconds: 300),
+        Curve curve = Curves.easeInOut,
+      }) {
     return Navigator.pushReplacement<T, TO>(
       context,
-      MaterialPageRoute(builder: (_) => screen),
+      _animatedRoute(screen, type, duration, curve) as Route<T>,
     );
   }
 
-  /// Pushes a screen and removes all previous screens until [untilRoute].
-  ///
-  /// Defaults to removing until `/Home`.
+  /// Push a screen and remove all previous routes until [untilRoute]
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
-    BuildContext context,
-    Widget screen, {
-    String untilRoute = '/Home',
-  }) {
+      BuildContext context,
+      Widget screen, {
+        String? untilRoute,
+        TransitionType type = TransitionType.fade,
+        Duration duration = const Duration(milliseconds: 300),
+        Curve curve = Curves.easeInOut,
+      }) {
     return Navigator.pushAndRemoveUntil<T>(
       context,
-      MaterialPageRoute(builder: (_) => screen),
-      ModalRoute.withName(untilRoute),
+      _animatedRoute(screen, type, duration, curve) as Route<T>,
+      untilRoute == null ? (route) => false : ModalRoute.withName(untilRoute),
+    );
+  }
+
+  /// Pop the current screen
+  static void pop<T extends Object?>(BuildContext context, [T? result]) {
+    if (Navigator.canPop(context)) {
+      Navigator.pop<T>(context, result);
+    }
+  }
+
+  /// Create animated route based on [TransitionType]
+  static PageRouteBuilder _animatedRoute(
+      Widget page,
+      TransitionType type,
+      Duration duration,
+      Curve curve,
+      ) {
+    return PageRouteBuilder(
+      pageBuilder: (_, __, ___) => page,
+      transitionDuration: duration,
+      transitionsBuilder: (_, animation, __, child) {
+        final curved = CurvedAnimation(parent: animation, curve: curve);
+
+        switch (type) {
+          case TransitionType.fade:
+            return FadeTransition(opacity: curved, child: child);
+          case TransitionType.slideLeft:
+            return SlideTransition(
+              position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(curved),
+              child: child,
+            );
+          case TransitionType.slideRight:
+            return SlideTransition(
+              position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero).animate(curved),
+              child: child,
+            );
+          case TransitionType.slideUp:
+            return SlideTransition(
+              position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(curved),
+              child: child,
+            );
+          case TransitionType.slideDown:
+            return SlideTransition(
+              position: Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero).animate(curved),
+              child: child,
+            );
+          case TransitionType.scale:
+            return ScaleTransition(scale: curved, child: child);
+          case TransitionType.rotate:
+            return RotationTransition(turns: curved, child: child);
+          }
+
+
+      },
     );
   }
 }
